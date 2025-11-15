@@ -1,0 +1,39 @@
+services:
+  backend:
+    build:
+      context: .
+      dockerfile: backend/Dockerfile
+    container_name: keynua-backend
+    ports:
+      - "3001:3001"
+    environment:
+      - PORT=3001
+      - KEYNUA_API_KEY=${KEYNUA_API_KEY}
+      - KEYNUA_API_TOKEN=${KEYNUA_API_TOKEN}
+      - CORS_ORIGIN=http://localhost:5173
+      - WEBHOOK_API_KEY=${WEBHOOK_API_KEY}
+      - HTTP_TIMEOUT_MS=10000
+      - HTTP_RETRIES=3
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "wget", "--quiet", "--tries=1", "--spider", "http://localhost:3001/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+
+  frontend:
+    build:
+      context: .
+      dockerfile: frontend/Dockerfile
+    container_name: keynua-frontend
+    ports:
+      - "5173:5173"
+    depends_on:
+      - backend
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "wget", "--quiet", "--tries=1", "--spider", "http://localhost:5173"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+
