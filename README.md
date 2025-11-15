@@ -41,3 +41,7 @@ WEBHOOK_API_KEY=tu_webhook_key
 ```
 
 Para la **Opción 1**, el script `start-dev.sh` genera automáticamente los archivos `.env` en backend y frontend.
+
+El webhook se puede probar con cloudflared.
+Simplemente ejecuta `cloudflared tunnel --url http://localhost:3001` y copia la URL en en formato `https://<url>.trycloudflare.com/api/webhook` en el panel de webhooks de Keynua.
+
