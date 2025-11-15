@@ -5,7 +5,7 @@
 ### Opción 1: Con `start-dev.sh` (Desarrollo)
 
 ```bash
-git clone <repo>
+git clone https://github.com/BrunoMont2003/test-keynua
 cd test-keynua
 npm install -r backend frontend
 ./start-dev.sh
@@ -17,7 +17,7 @@ npm install -r backend frontend
 ### Opción 2: Con Docker Compose
 
 ```bash
-git clone <repo>
+git clone https://github.com/BrunoMont2003/test-keynua
 cd test-keynua
 docker compose up --build
 ```
